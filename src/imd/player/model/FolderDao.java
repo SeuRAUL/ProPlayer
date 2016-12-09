@@ -16,22 +16,22 @@ public class FolderDao {
     /**
      * The {@link File} instance that keeps the Directory file path.
      */
-	    private final File folders = new File("/home/seuraul/projetos/ProPlayer/Diretorios.txt");
+	private /*@ spec_public @*/ final File folders = new File("/home/seuraul/projetos/ProPlayer/Diretorios.txt");
     /**
      * The {@link File} instance that keeps the path to the file containing all 
      * musics previously opened in the player.
      */
-    private File musicFile;
+    private /*@ spec_public @*/ File musicFile;
     /**
      * The {@link File} instance that keeps the path to the folder which 
      * contains all the playlist files within itself.
      */
-    private File playlistFolder;
+    private /*@ spec_public @*/ File playlistFolder;
     /**
      * The {@link File} instance that keeps the path to the file which contains
      * all users registered in the system.
      */
-    private File userFile;
+    private /*@ spec_public @*/ File userFile;
 
     /**
      * Constructor that reads the data containing inside of {@link folders} and 
@@ -43,6 +43,16 @@ public class FolderDao {
      * @throws FileNotFoundException
      * @throws IOException 
      */
+    /*@ public normal_behavior
+	@ 	requires folders		 != null;
+	@ 	ensures musicFile		 != null;
+	@ 	ensures playlistFolder	 != null; 
+	@ 	ensures musicuserFile	 != null; 
+	@ also
+	@   public exceptional_behavior
+	@	requires folders == null;
+	@   signals_only FileNotFoundException, IOException;
+	@*/
     public FolderDao() throws FileNotFoundException, IOException {
         try (BufferedReader bufferReader = new BufferedReader(new FileReader(folders))) {
             this.musicFile = new File(bufferReader.readLine());
@@ -56,10 +66,15 @@ public class FolderDao {
      * the system.
      * @return the file containing all musics previously opened
      */
-    public File getMusicFile() {
+    /*@	ensures \result == musicFile; @*/
+    public /*@ pure @*/ File getMusicFile() {
         return musicFile;
     }
 
+    /*@ requires musicFile;
+	@ assignable this.musicFile;
+	@ ensures this.musicFile == musicFile; 
+	@*/
     /**
      * Sets the musicFile to another one.
      * @param musicFile 
@@ -73,7 +88,8 @@ public class FolderDao {
      * playlists that were saved in the system.
      * @return the folder containing a number of playlist files.
      */
-    public File getPlaylistFolder() {
+    /*@	ensures \result == playlistFolder; @*/
+    public /*@ pure @*/ File getPlaylistFolder() {
         return playlistFolder;
     }
 
@@ -82,6 +98,10 @@ public class FolderDao {
      * containing only a number of files with the playlist format.
      * @param playlistFolder 
      */
+    /*@ requires playlistFolder;
+	@ assignable this.playlistFolder;
+	@ ensures this.playlistFolder == playlistFolder; 
+	@*/
     public void setPlaylistFolder(File playlistFolder) {
         this.playlistFolder = playlistFolder;
     }
@@ -93,7 +113,8 @@ public class FolderDao {
      * 
      * @return a File with a number of user data
      */
-    public File getUserFile() {
+    /*@	ensures \result == userFile; @*/
+    public /*@ pure @*/ File getUserFile() {
         return userFile;
     }
 
@@ -102,6 +123,10 @@ public class FolderDao {
      * contain a number of user data written using User formatting.
      * @param userFile 
      */
+    /*@ requires userFile;
+	@ assignable this.userFile;
+	@ ensures this.userFile == userFile; 
+	@*/
     public void setUserFile(File userFile) {
         this.userFile = userFile;
     }
