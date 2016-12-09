@@ -14,7 +14,8 @@ public class UserControl {
      * The {@link User} instance who is set to be the main User of this program 
      * usage.
      */
-    private User loggedUser;
+    private /*@ spec_public nullable @*/ User loggedUser;
+    //@ public initially loggedUser == null;
 
     /** 
      * Simple constructor, not much is done here.

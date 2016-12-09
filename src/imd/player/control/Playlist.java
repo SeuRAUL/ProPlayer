@@ -11,17 +11,21 @@ public class Playlist {
     /**
      * Receives the playlist name, that will be useful for playlist identification.
      */
-    private String name;
+    private /*@ spec_public @*/ String name;
     
     /**
      * Receives an {@link ArrayList} of {@link Music}, that will storage all the playlist musics.
      */
-    private ArrayList<Music> musics;
+    private /*@ spec_public @*/ ArrayList<Music> musics;
+    //@ public initially musics.size() == 0;
 
     /**
      * Constructor used to create a new playlist without musics. 
      * @param name Receives the playlist name.
      */
+    /*@
+      @ ensures this.name.equals(name);
+      @*/
     public Playlist(String name) {
         this.name = name;
         this.musics = new ArrayList<>();

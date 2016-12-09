@@ -10,17 +10,17 @@ public abstract class User {
      * A {@link String} that keeps the user id, this data should be hidden and
      * the user must not access it easily.
      */
-    protected String id;
+    protected /*@ spec_public @*/ String id;
     /**
      * A {@link String} that keeps the user login, this should always be set when
      * creating a new User, since it is it's main key to access the data.
      */
-    protected String login;
+    protected /*@ spec_public @*/ String login;
     /**
      * A {@link String} that keeps the user password, it must be set when creating
      * objects of this class and should not be easily accessed.
      */
-    protected String password;
+    protected /*@ spec_public @*/ String password;
     
     /**
      * A simple constructor who sets the variables and creates a new id for the 
@@ -28,6 +28,12 @@ public abstract class User {
      * @param login The login to be set.
      * @param password The password to be set.
      */
+    /*@ 
+      @ requires login != null;
+      @ requires password != null;
+      @ ensures this.login.equals(login);
+      @ ensures this.password.equals(password);
+      @*/
     public User(String login, String password){
         this.id = login.hashCode() + "";
         this.login = login;
@@ -39,7 +45,8 @@ public abstract class User {
      * related to this User.
      * @return a {@link String} representing this User's id. 
      */
-    public String getId() {
+    /*@	ensures \result == id; @*/
+    public /*@ pure @*/ String getId() {
         return id;
     }
 
@@ -48,7 +55,8 @@ public abstract class User {
      * objects.
      * @return a {@link String} with this user login. 
      */
-    public String getLogin() {
+    /*@	ensures \result == login; @*/
+    public /*@ pure @*/ String getLogin() {
         return login;
     }
 
@@ -57,7 +65,8 @@ public abstract class User {
      * should be used sparingly.
      * @return 
      */
-    public String getPassword() {
+    /*@	ensures \result == password; @*/
+    public /*@ pure @*/ String getPassword() {
         return password;
     }
 
@@ -65,6 +74,8 @@ public abstract class User {
      * Sets a new password to this user, used mostly for updating user data.
      * @param password this user's new password.
      */
+    /*@ requires password != "";
+	  @	ensures this.password.equals(password); @*/
     public void setPassword(String password) {
         this.password = password;
     }
@@ -74,12 +85,15 @@ public abstract class User {
      * @return A {@link String} that contains this user's login and password in
      * separate lines.
      */
+    /*@ requires true;
+	  @ assignable \nothing;
+	  @ ensures \result == this.login + "\n" + this.password + "\n" @*/
     @Override
-    public String toString() {
+    public /*@ pure @*/ String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.login + "\n");
         sb.append(this.password + "\n");
         return sb.toString();
     }
-    
+
 }
