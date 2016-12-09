@@ -127,7 +127,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         btnBack.setVisible(false);
-        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 380, 71, -1));
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints	(272, 380, 71, -1));
 
         btnForward.setText("Forward");
         btnForward.addActionListener(new java.awt.event.ActionListener() {

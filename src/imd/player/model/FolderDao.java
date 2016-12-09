@@ -16,7 +16,7 @@ public class FolderDao {
     /**
      * The {@link File} instance that keeps the Directory file path.
      */
-    private final File folders = new File("/home/anderson/Documents/Diretorios.txt");
+	    private final File folders = new File("/home/seuraul/projetos/ProPlayer/Diretorios.txt");
     /**
      * The {@link File} instance that keeps the path to the file containing all 
      * musics previously opened in the player.

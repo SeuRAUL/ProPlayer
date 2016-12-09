@@ -1,3 +1,3 @@
-/home/anderson/musics.txt
-/home/anderson/playlist/
-/home/anderson/user.txt
+/home/seuraul/projetos/ProPlayer/musics.txt
+/home/seuraul/projetos/playlist
+/home/seuraul/projetos/ProPlayer/user.txt

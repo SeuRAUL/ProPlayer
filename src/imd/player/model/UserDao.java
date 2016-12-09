@@ -82,7 +82,7 @@ public class UserDao implements DaoInterface {
         ArrayList<User> userList = new ArrayList<>();
         try {
             FileWriter writer = new FileWriter(this.userFile, false);
-            userTree.enlistTreeElements(userList);
+            userTree.enlistTreeElements(null, userList);
             for (User user : userList) {
                 writer.write(user.toString());
             }
@@ -109,7 +109,7 @@ public class UserDao implements DaoInterface {
      */
     public ArrayList<User> getAllUsers() {
         ArrayList<User> list = new ArrayList<>();
-        this.userTree.enlistTreeElements(list);
+        this.userTree.enlistTreeElements(null, list);
         return list;
     }
 
